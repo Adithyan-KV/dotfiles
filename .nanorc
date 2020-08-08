@@ -1,0 +1,15 @@
+##show linenumbers in the editor
+set linenumbers
+
+##enable autoindentation
+set autoindent
+
+##enable navigation by mouse
+set mouse
+
+##show an indicator at 72 characters
+set guidestripe 72
+set stripecolor white,white
+
+##set the tab length to 4 characters. default was 8
+set tabsize 4
