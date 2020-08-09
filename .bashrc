@@ -50,31 +50,6 @@ git_status() {
     echo $output
 }
 
-
-git_color() {
-    # Receives output of git_status as argument; produces appropriate color
-    # code based on status of working directory:
-    # - White if everything is clean
-    # - Green if all changes are staged
-    # - Red if there are uncommitted changes with nothing staged
-    # - Yellow if there are both staged and unstaged changes
-    # - Blue if there are unpushed commits
-    local staged=$([[ $1 =~ \+ ]] && echo yes)
-    local dirty=$([[ $1 =~ [!\?] ]] && echo yes)
-    local needs_push=$([[ $1 =~ P ]] && echo yes)
-    if [[ -n $staged ]] && [[ -n $dirty ]]; then
-        echo -e '\033[1;33m'  # bold yellow
-    elif [[ -n $staged ]]; then
-        echo -e '\033[1;32m'  # bold green
-    elif [[ -n $dirty ]]; then
-        echo -e '\033[1;31m'  # bold red
-    elif [[ -n $needs_push ]]; then
-        echo -e '\033[1;34m' # bold blue
-    else
-        echo -e '\033[1;37m'  # bold white
-    fi
-}
-
 git_state() {
     # First, get the branch name...
     local branch=$(parse_git_branch)
@@ -83,7 +58,7 @@ git_state() {
     if [[ -n $branch ]]; then
         local state=$(git_status)
         # Now output the actual code to insert the branch and status
-        echo -e "$state"  # last bit resets color
+        echo -e $state # last bit resets color
     fi
 }
 
