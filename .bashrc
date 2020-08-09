@@ -38,7 +38,7 @@ git_status() {
     # ! unstaged changes are present
     # ? untracked files are present
     # S changes have been stashed
-    # P local commits need to be pushed to the remote
+    # -> (up arrow utf8) local commits need to be pushed to the remote
     local status="$(git status --porcelain 2>/dev/null)"
     local output=''
     [[ -n $(egrep '^[MADRC]' <<<"$status") ]] && output="$output[+]"
@@ -71,16 +71,16 @@ on_in_prompt(){
 }
 
 
-PS1="\n\[${bold}\]"			   		 	#newline and set everything to bold
-PS1+="\[${blue}\]\u "      			 	#username
-PS1+="\[${white}\]at "     			 	#at
-PS1+="\[${pink}\]\h "      			 	#hostname
-PS1+="\[${white}\]in "     			 	#in
-PS1+="\[${orange}\]\w"    			 	#full path (use \W for partial path)
-PS1+="\[${white}\] \$(on_in_prompt)"     #on
-PS1+="\[${green}\]\$(parse_git_branch)" #branch
-PS1+="\$(git_state)"                   #git state, uncommited changes and stuff
-PS1+="\[ ${mosque}$ ${reset}\]"          #dollar sign prompt and reset colors
+PS1="\n\[${bold}\]"			   		 		#newline and set everything to bold
+PS1+="\[${blue}\]\u "      			 		#username
+PS1+="\[${white}\]at "     			 		#at
+PS1+="\[${pink}\]\h "      			 		#hostname
+PS1+="\[${white}\]in "     			 		#in
+PS1+="\[${orange}\]\w"    			 		#full path (use \W for partial path)
+PS1+="\[${white}\] \$(on_in_prompt)"     	#on
+PS1+="\[${green}\]\$(parse_git_branch)" 	#branch
+PS1+="\$(git_state)"                   		#git state, uncommited changes and stuff
+PS1+="\[ ${mosque}$ ${reset}\]"          	#dollar sign prompt and reset colors
 export PS1;
 
 
