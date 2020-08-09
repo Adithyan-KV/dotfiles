@@ -45,9 +45,9 @@ git_status() {
     [[ -n $(egrep '^.[MD]' <<<"$status") ]] && output="$output[!]"
     [[ -n $(egrep '^\?\?' <<<"$status") ]] && output="$output[?]"
     [[ -n $(git stash list) ]] && output="${output}[S]"
-    [[ -n $(git log --branches --not --remotes) ]] && output="${output}[P]"
+    [[ -n $(git log --branches --not --remotes) ]] && output="${output}[\xe2\x86\x91]"
     [[ -n $output ]] && output="$output"  # separate from branch name
-    echo $output
+    echo -e  $output
 }
 
 git_state() {
