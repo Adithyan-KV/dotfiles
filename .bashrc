@@ -2,7 +2,7 @@
 ##<https://github.com/jcgoble3/gitstuff/blob/master/gitprompt.sh>
 ##
 ##tweaked for my needs
-##license MIT as long as the original 
+##license MIT as long as the original author has no conflicts 
 
 
 ##the bash prompt
