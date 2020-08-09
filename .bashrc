@@ -45,9 +45,9 @@ git_status() {
     [[ -n $(egrep '^.[MD]' <<<"$status") ]] && output="$output[!]"
     [[ -n $(egrep '^\?\?' <<<"$status") ]] && output="$output[?]"
     [[ -n $(git stash list) ]] && output="${output}[S]"
-    [[ -n $(git log --branches --not --remotes) ]] && output="${output}[\xe2\x86\x91]"
+    [[ -n $(git log --branches --not --remotes) ]] && output="${output}\xe2\x87\xa7"
     [[ -n $output ]] && output="$output"  # separate from branch name
-    echo -e  $output
+    echo -e $output
 }
 
 git_state() {
@@ -76,11 +76,11 @@ PS1+="\[${blue}\]\u "      			 	#username
 PS1+="\[${white}\]at "     			 	#at
 PS1+="\[${pink}\]\h "      			 	#hostname
 PS1+="\[${white}\]in "     			 	#in
-PS1+="\[${orange}\]\w "    			 	#full path (use \W for partial path)
-PS1+="\[${white}\]\$(on_in_prompt)"     #on
+PS1+="\[${orange}\]\w"    			 	#full path (use \W for partial path)
+PS1+="\[${white}\] \$(on_in_prompt)"     #on
 PS1+="\[${green}\]\$(parse_git_branch)" #branch
 PS1+="\$(git_state)"                   #git state, uncommited changes and stuff
-PS1+="\[${mosque}$ ${reset}\]"          #dollar sign prompt and reset colors
+PS1+="\[ ${mosque}$ ${reset}\]"          #dollar sign prompt and reset colors
 export PS1;
 
 
