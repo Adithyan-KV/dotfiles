@@ -106,5 +106,5 @@ PS1+="\[${olive}\]\$(get_virtualenv)"
 PS1+="\[${white}\] \$(print_on_in_prompt)"  #on
 PS1+="\[${green}\]\$(parse_git_branch)" 	#branch
 PS1+="\$(git_state)"                        #git state, uncommited changes and stuff
-PS1+="\[${mosque}$ ${reset}\]"          	#dollar sign prompt and reset colors
+PS1+="\[ ${mosque}$ ${reset}\]"          	#dollar sign prompt and reset colors
 export PS1;
