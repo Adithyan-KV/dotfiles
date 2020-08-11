@@ -67,7 +67,7 @@ print_on_in_prompt(){
 	#if in a git directory add echo "on"
 	#will be added to prompt as `on {branch}`
 	if [[ -n $(parse_git_branch) ]]; then
-		echo -e "on "
+		echo -e " on "
 	fi
 }
 
@@ -91,7 +91,7 @@ print_venv_in_prompt (){
     if test -z $VIRTUAL_ENV ; then
         echo ''
     else
-        echo ' venv'
+        echo ' venv '
     fi
 }
 
@@ -101,9 +101,9 @@ PS1+="\[${white}\]at "     			 		#at
 PS1+="\[${pink}\]\h "      			 		#hostname
 PS1+="\[${white}\]in "     			 		#in
 PS1+="\[${orange}\]\w"    			 		#full path (use \W for partial path)
-PS1+="\[${white}\]\$(print_venv_in_prompt) "
+PS1+="\[${white}\]\$(print_venv_in_prompt)"
 PS1+="\[${olive}\]\$(get_virtualenv)"
-PS1+="\[${white}\] \$(print_on_in_prompt)"  #on
+PS1+="\[${white}\]\$(print_on_in_prompt)"  #on
 PS1+="\[${green}\]\$(parse_git_branch)" 	#branch
 PS1+="\$(git_state)"                        #git state, uncommited changes and stuff
 PS1+="\[ ${mosque}$ ${reset}\]"          	#dollar sign prompt and reset colors
