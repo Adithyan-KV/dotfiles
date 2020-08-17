@@ -13,7 +13,7 @@ orange=$(tput setaf 172);
 pink=$(tput setaf 173);
 green=$(tput setaf 34);
 blue=$(tput setaf 61);
-yellow=$(tput setaf 178);
+yellow=$(tput setaf 184);
 mosque=$(tput setaf 23);
 red=$(tput setaf 196);
 olive=$(tput setaf 112);
@@ -73,7 +73,7 @@ print_on_in_prompt(){
 
 # Show python virtualenv
 
-#to disable the promt that virtualenv adds by default
+#to disable the prompt that virtualenv adds by default
 VIRTUAL_ENV_DISABLE_PROMPT='1'
 
 #if virtualenv exists, echo name of virtualenv
@@ -102,7 +102,7 @@ PS1+="\[${pink}\]\h "      			 		#hostname
 PS1+="\[${white}\]in "     			 		#in
 PS1+="\[${orange}\]\w"    			 		#full path (use \W for partial path)
 PS1+="\[${white}\]\$(print_venv_in_prompt)"
-PS1+="\[${olive}\]\$(get_virtualenv)"
+PS1+="\[${yellow}\]\$(get_virtualenv)"
 PS1+="\[${white}\]\$(print_on_in_prompt)"  #on
 PS1+="\[${green}\]\$(parse_git_branch)" 	#branch
 PS1+="\$(git_state)"                        #git state, uncommited changes and stuff
