@@ -13,3 +13,10 @@ set stripecolor white,white
 
 ##set the tab length to 4 characters. default was 8
 set tabsize 4
+
+##set behavior for ctrl+right at end of words
+set afterends
+
+##automatically wrap lines when they become too long
+set breaklonglines
+
