@@ -8,11 +8,11 @@
 ##the bash prompt
 
 #color palette
-rhino=$(tput setaf 18);
-wedgewood=$(tput setaf 24);
-shipcove=$(tput setaf 31);
-zhorba=$(tput setaf 137);
-cloudblue=$(tput setaf 116);
+pastelpurple=$(tput setaf 104)
+oslogrey=$(tput setaf 110);
+coffee=$(tput setaf 144);
+pastelblue=$(tput setaf 61);
+altblue=$(tput setaf 67);
 kimberly=$(tput setaf 96);
 grey=$(tput setaf 240)
 orange=$(tput setaf 214)
@@ -93,15 +93,15 @@ print_venv_in_prompt (){
 }
 
 PS1="\n\[${bold}\]"			   		 		#newline and set everything to bold
-PS1+="\[${shipcove}\]\u "      			 		#username
+PS1+="\[${pastelpurple}\]\u "      			 		#username
 PS1+="\[${grey}\]at "     			 		#at
-PS1+="\[${wedgewood}\]\h "      			 		#hostname
+PS1+="\[${pastelblue}\]\h "      			 		#hostname
 PS1+="\[${grey}\]in "     			 		#in
-PS1+="\[${kimberly}\]\w"    			 		#full path (use \W for partial path)
+PS1+="\[${oslogrey}\]\w"    			 		#full path (use \W for partial path)
 PS1+="\[${grey}\]\$(print_venv_in_prompt)"
-PS1+="\[${orange}\]\$(get_virtualenv)"
+PS1+="\[${coffee}\]\$(get_virtualenv)"
 PS1+="\[${grey}\]\$(print_on_in_prompt)"  #on
-PS1+="\[${zhorba}\]\$(parse_git_branch)" 	#branch
+PS1+="\[${altblue}\]\$(parse_git_branch)" 	#branch
 PS1+="\$(git_state)"                        #git state, uncommited changes and stuff
 PS1+="\[ ${grey}$ ${reset}\]"          	#dollar sign prompt and reset colors
 export PS1;
