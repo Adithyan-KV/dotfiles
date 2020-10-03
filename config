@@ -92,12 +92,12 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-set $workspace1 "TERMINALS &#xf120;" 
-set $workspace2 "CODE &#xf121;" 
-set $workspace3 "WEB &#xf0ac;" 
-set $workspace4 "MUSIC &#xf001;" 
-set $workspace5 "CHAT &#xf086;" 
-set $workspace6 "MISC &#xf128;" 
+set $workspace1 "&#xf120; TERMINALS" 
+set $workspace2 "&#xf121; CODE" 
+set $workspace3 "&#xf0ac; WEB" 
+set $workspace4 "&#xf001; MUSIC" 
+set $workspace5 "&#xf086; CHAT" 
+set $workspace6 "&#xf128; MISC" 
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -187,6 +187,8 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # no border
 for_window [class="^.*"] border pixel 2
+gaps outer 5
+gaps inner 5
 
 exec_always feh --bg-scale /home/adithyankv/Pictures/wallpapers/emerald_wallpaper.png
 
