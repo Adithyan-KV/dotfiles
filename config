@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango:monospace 8, FontAwesome 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -92,12 +92,12 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-set $workspace1 "TERMINALS" 
-set $workspace2 "CODE" 
-set $workspace3 "WEB " 
-set $workspace4 "MUSIC " 
-set $workspace5 "CHAT" 
-set $workspace6 "MISC." 
+set $workspace1 "TERMINALS &#xf120;" 
+set $workspace2 "CODE &#xf121;" 
+set $workspace3 "WEB &#xf0ac;" 
+set $workspace4 "MUSIC &#xf001;" 
+set $workspace5 "CHAT &#xf086;" 
+set $workspace6 "MISC &#xf128;" 
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -161,6 +161,7 @@ bindsym $mod+r mode "resize"
 bar {
         position top
         status_command i3status
+        font pango:monospace 8, FontAwesome 8
 }
 
 # Lock screen upon mod shift l
@@ -187,4 +188,8 @@ bindsym XF86AudioPrev exec playerctl previous
 # no border
 for_window [class="^.*"] border pixel 2
 
-exec_always feh --bg-scale /home/adithyankv/Pictures/wallpapers/wallpaper.jpg
+exec_always feh --bg-scale /home/adithyankv/Pictures/wallpapers/emerald_wallpaper.png
+
+# always launch certain apps in certain workspaces
+for_window [class="Spotify"] move to workspace $workspace4
+assign [class="Firefox"] $workspace3
