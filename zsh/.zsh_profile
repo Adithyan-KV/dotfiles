@@ -1,0 +1,21 @@
+# Making completion case insensitive
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+
+## ----------------------------------------
+## Lines configured by zsh-newuser-install
+## ----------------------------------------
+
+# Settings for history of commands in the terminal
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+
+setopt nomatch
+
+# Set emacs like keybindings
+bindkey -e
+
+# Loading completion system
+autoload -Uz compinit
+compinit
