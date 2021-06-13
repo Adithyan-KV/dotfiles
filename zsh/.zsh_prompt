@@ -1,0 +1,41 @@
+##---------------------------------------
+## THE ZSH PROMPT
+##---------------------------------------
+
+# Setting the color palette
+BG_COLOR_1=131
+BG_COLOR_2=62
+
+
+## Setting the glyph to seperate different sections
+# Can have values from https://github.com/ryanoasis/powerline-extra-symbols
+SEPERATOR_GLYPH='\Ue0b4'
+
+## Setting the prompt
+# ------------------------------------------
+
+# Use bold text for prompt
+PROMPT='%B'
+
+# Adding username
+PROMPT+='%K{'$BG_COLOR_1'}'
+PROMPT+='  '    #User icon
+PROMPT+='%n '
+PROMPT+='%k'
+# Adding terminating character
+PROMPT+='%F{'$BG_COLOR_1'}%K{'$BG_COLOR_2'}'
+PROMPT+=$(echo $SEPERATOR_GLYPH)
+PROMPT+='%f'
+
+# Adding file path
+PROMPT+='%K{'$BG_COLOR_2'}'
+PROMPT+='  '     #Folder icon
+PROMPT+='%1~ '       # Add full file path
+# PROMPT+='%~ '     # Add partial file path
+PROMPT+='%k'
+# Adding terminating character
+PROMPT+='%F{'$BG_COLOR_2'}'
+PROMPT+=$(echo $SEPERATOR_GLYPH' ')
+
+# Ending bold and reseting colors
+PROMPT+='%b%k%f'
