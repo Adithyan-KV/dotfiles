@@ -1,2 +1,0 @@
-#adding the location of modules to python path
-export PYTHONPATH='~/.local/lib/python3.8/site-packages'
