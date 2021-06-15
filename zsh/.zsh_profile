@@ -38,4 +38,5 @@ ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=255,bold"
 ZSH_HIGHLIGHT_STYLES[command]="fg=134,bold"
 ZSH_HIGHLIGHT_STYLES[builtin]="fg=29,bold"
 ZSH_HIGHLIGHT_STYLES[alias]='fg=32,bold'
-
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]="fg=245,bold"
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=245,bold'
