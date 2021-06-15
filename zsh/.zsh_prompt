@@ -5,11 +5,16 @@
 # Setting the color palette
 BG_COLOR_1=131
 BG_COLOR_2=62
+BG_COLOR_3='%k'
+BG_COLOR_4=214
+BG_COLOR_GIT=136
 
 
 ## Setting the glyph to seperate different sections
 # Can have values from https://github.com/ryanoasis/powerline-extra-symbols
 SEPERATOR_GLYPH='\Ue0b4'
+SEPERATOR_GLYPH_RIGHT='\Ue0b6'
+
 
 ## Setting the prompt
 # ------------------------------------------
@@ -35,7 +40,11 @@ PROMPT+='%1~ '       # Add full file path
 PROMPT+='%k'
 # Adding terminating character
 PROMPT+='%F{'$BG_COLOR_2'}'
-PROMPT+=$(echo $SEPERATOR_GLYPH' ')
+PROMPT+=$(echo $SEPERATOR_GLYPH)' '
+PROMPT+='%f'
+
+PROMPT+='%K{'$BG_COLOR_3'}'
+PROMPT+=$GIT_PROMPT
 
 # Ending bold and reseting colors
 PROMPT+='%b%k%f'

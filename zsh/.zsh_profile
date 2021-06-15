@@ -19,3 +19,23 @@ bindkey -e
 # Loading completion system
 autoload -Uz compinit
 compinit
+
+## auto-suggestions
+##-------------------------------------
+# Uses package from https://github.com/zsh-users/zsh-autosuggestions
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# fg can use values from 256 color palette or hex values
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=241"
+
+# ## syntax highlighting
+# ##--------------------------------------
+# # uses package from https://github.com/zsh-users/zsh-syntax-highlighting
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# # Setting colors 
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=255,bold"
+ZSH_HIGHLIGHT_STYLES[command]="fg=134,bold"
+ZSH_HIGHLIGHT_STYLES[builtin]="fg=29,bold"
+ZSH_HIGHLIGHT_STYLES[alias]='fg=32,bold'
+
