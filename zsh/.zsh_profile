@@ -35,8 +35,9 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # # Setting colors 
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=255,bold"
-ZSH_HIGHLIGHT_STYLES[command]="fg=134,bold"
-ZSH_HIGHLIGHT_STYLES[builtin]="fg=29,bold"
-ZSH_HIGHLIGHT_STYLES[alias]='fg=32,bold'
-ZSH_HIGHLIGHT_STYLES[single-hyphen-option]="fg=245,bold"
-ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=245,bold'
+ZSH_HIGHLIGHT_STYLES[command]="fg=#e89d56,bold"
+ZSH_HIGHLIGHT_STYLES[builtin]="fg=#54bf8f,bold"
+ZSH_HIGHLIGHT_STYLES[alias]='fg=#74b8e8,bold'
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]="fg=#60818f,bold"
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=#60818f,bold'
+ZSH_HIGHLIGHT_STYLES[precommand]='fg=#ff392e,bold'
