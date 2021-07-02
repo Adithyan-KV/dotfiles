@@ -48,16 +48,36 @@ get_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
-num_unstaged(){
-    git diff --cached --numstat|wc -l
+get_git_status(){
+    status_string=''
+    num_unstaged=$(get_num_unstaged)
+    num_staged=$(get_num_staged)
+    num_commits=$(get_num_committed)
+    if [[ -n $num_unstaged ]];then
+        status_string+=' ﬒'$num_unstaged' '
+    fi
+    if [[ -n $num_staged ]];then
+        status_string+=''$num_staged' '
+    fi
+    if [[ -n $num_commits ]];then
+        status_string+=''$num_commits' '
+    fi
+    echo $status_string
 }
 
-num_staged(){
+# Files not yet added
+get_num_unstaged(){
+    echo $(git diff --cached --numstat|wc -l)
+}
+
+# Files added and ready to be commited
+get_num_staged(){
     git diff --numstat|wc -l
 }
 
-num_committed(){
-    git cherry -v|wc -l
+# Files commited but not pushed
+get_num_committed(){
+    git cherry|wc -l
 }
 
 # #if virtualenv exists, echo name of virtualenv
@@ -98,12 +118,16 @@ VIRTUAL_ENV_DISABLE_PROMPT='1'
 set_right_prompt(){
     RPROMPT='%B'
     branch=$(get_git_branch)
+    if [[ -n $branch ]];then
+        git_string=$branch$(get_git_status)
+    fi
+    # echo $git_string
     venv=$(get_virtualenv)
     if [[ -n $branch ]]&&[[ -n $venv ]];then
-        add_unit_right ' $branch' $RESET_COLOR $BG_COLOR_4
+        add_unit_right ' $git_string' $RESET_COLOR $BG_COLOR_4
         add_unit_right ' $venv ' $BG_COLOR_4 $BG_COLOR_5
     elif [[ -n $branch ]];then
-        add_unit_right ' $branch' $RESET_COLOR $BG_COLOR_4
+        add_unit_right ' $git_string' $RESET_COLOR $BG_COLOR_4
     elif [[ -n $venv ]];then
         add_unit_right ' $venv ' $RESET_COLOR $BG_COLOR_5
     else
