@@ -53,14 +53,14 @@ get_git_status(){
     num_unstaged=$(get_num_unstaged)
     num_staged=$(get_num_staged)
     num_commits=$(get_num_committed)
-    if [[ -n $num_unstaged ]];then
-        status_string+=' ﬒'$num_unstaged' '
+    if [[ $num_unstaged != 0 ]];then
+        status_string+=' ﬒'$num_unstaged
     fi
-    if [[ -n $num_staged ]];then
-        status_string+=''$num_staged' '
+    if [[ $num_staged != 0 ]];then
+        status_string+=' '$num_staged
     fi
-    if [[ -n $num_commits ]];then
-        status_string+=''$num_commits' '
+    if [[ $num_commits != 0 ]];then
+        status_string+=' '$num_commits
     fi
     echo $status_string
 }
