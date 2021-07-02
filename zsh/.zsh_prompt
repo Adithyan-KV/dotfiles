@@ -4,12 +4,13 @@
 
 # # Setting the color palette
 BG_COLOR_1=53
-BG_COLOR_2=90
+BG_COLOR_2=54
 BG_COLOR_3=92
 
 BG_COLOR_4=24
 BG_COLOR_5=31
 
+#setting it to a random string seems to reset the color :p
 RESET_COLOR=gibberish
 
 # ## Setting the glyph to seperate different sections
@@ -29,6 +30,7 @@ add_unit(){
     PROMPT+='%f'
 }
 
+# Similar to add_unit but adds to right side prompt
 add_unit_right(){
     RPROMPT+='%K{'$2'}%F{'$3'}'
     RPROMPT+=$(echo $SEPERATOR_GLYPH_RIGHT)
@@ -38,11 +40,6 @@ add_unit_right(){
     RPROMPT+='%k'
 }
 
-# ## Get distro name
-get_distro(){
-    cat /etc/*-release|awk 'FNR==2 {print}'|grep -oP '"\K[^"]+'
-}
-
 # # Get the name of the branch if there is one. Otherwise get nothing. Name of branch
 # # preceded by a branch icon
 get_git_branch() {
@@ -50,7 +47,18 @@ get_git_branch() {
 	#else return the branch name with * attached to it, i.e current branch
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
-# PROMPT='%1~ $(get_git_branch)>'
+
+num_unstaged(){
+    git diff --cached --numstat|wc -l
+}
+
+num_staged(){
+    git diff --numstat|wc -l
+}
+
+num_committed(){
+    git cherry -v|wc -l
+}
 
 # #if virtualenv exists, echo name of virtualenv
 get_virtualenv () {
@@ -72,12 +80,12 @@ get_virtualenv () {
 # Use bold text for prompt
 PROMPT='%B'
 
-add_unit '  ' $BG_COLOR_1 $BG_COLOR_2      #Arch logo
-add_unit '  %n' $BG_COLOR_2 $BG_COLOR_3    #Username
-add_unit '  %1~ ' $BG_COLOR_3 $RESET_COLOR              #Partial file path
+add_unit '  ' $BG_COLOR_1 $BG_COLOR_2                     #Arch logo
+# add_unit '  %n' $BG_COLOR_2 $BG_COLOR_3                  #Username
+add_unit '  %1~ ' $BG_COLOR_2 $RESET_COLOR                #Partial file path
 
 # Ending bold and reseting colors
-PROMPT+='%b%k%f'
+PROMPT+=' %b%k%f'
 
 ## RIGHT PROMPT
 ##-------------
@@ -92,19 +100,19 @@ set_right_prompt(){
     branch=$(get_git_branch)
     venv=$(get_virtualenv)
     if [[ -n $branch ]]&&[[ -n $venv ]];then
-        add_unit_right '  $branch' $RESET_COLOR $BG_COLOR_4
+        add_unit_right ' $branch' $RESET_COLOR $BG_COLOR_4
         add_unit_right ' $venv ' $BG_COLOR_4 $BG_COLOR_5
     elif [[ -n $branch ]];then
-        add_unit_right '  $branch' $RESET_COLOR $BG_COLOR_4
+        add_unit_right ' $branch' $RESET_COLOR $BG_COLOR_4
     elif [[ -n $venv ]];then
         add_unit_right ' $venv ' $RESET_COLOR $BG_COLOR_5
     else
         RPROMPT=''
     fi
 }
+RPROMPT+='%b%k%f'
 # Add the function to precmd_functions so that it is executed everytime the prompt
 # refreshes
 precmd_functions+=(set_right_prompt)
 
-RPROMPT+='%b%k%f'
 
