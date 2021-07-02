@@ -1,22 +1,25 @@
-##---------------------------------------
-## THE ZSH PROMPT
-##---------------------------------------
+# ##---------------------------------------
+# ## THE ZSH PROMPT
+# ##---------------------------------------
 
-# Setting the color palette
-BG_COLOR_1=131
-BG_COLOR_2=62
-BG_COLOR_3=100
-BG_COLOR_4=214
-BG_COLOR_GIT=136
+# # Setting the color palette
+BG_COLOR_1=53
+BG_COLOR_2=90
+BG_COLOR_3=92
 
-## Setting the glyph to seperate different sections
-# Can have values from https://github.com/ryanoasis/powerline-extra-symbols
+BG_COLOR_4=24
+BG_COLOR_5=31
+
+RESET_COLOR=gibberish
+
+# ## Setting the glyph to seperate different sections
+# # Can have values from https://github.com/ryanoasis/powerline-extra-symbols
 SEPERATOR_GLYPH='\Ue0b4'
 SEPERATOR_GLYPH_RIGHT='\Ue0b6'
 
-## Adds any text to one unit of the prompt
-## Takes 3 arguments 1.text 2.color_1 3.color_2
-## No arguments to color_2 will make the end transparent
+# ## Adds any text to one unit of the prompt
+# ## Takes 3 arguments 1.text 2.color_1 3.color_2
+# ## No arguments to color_2 will make the end transparent
 add_unit(){
     PROMPT+='%K{'$2'}'
     PROMPT+=''$1''
@@ -26,21 +29,82 @@ add_unit(){
     PROMPT+='%f'
 }
 
-## Get distro name
+add_unit_right(){
+    RPROMPT+='%K{'$2'}%F{'$3'}'
+    RPROMPT+=$(echo $SEPERATOR_GLYPH_RIGHT)
+    RPROMPT+='%F{'$2'}%K{'$3'}'
+    RPROMPT+='%f'  
+    RPROMPT+=''$1''
+    RPROMPT+='%k'
+}
+
+# ## Get distro name
 get_distro(){
     cat /etc/*-release|awk 'FNR==2 {print}'|grep -oP '"\K[^"]+'
 }
 
+# # Get the name of the branch if there is one. Otherwise get nothing. Name of branch
+# # preceded by a branch icon
+get_git_branch() {
+	#if stderror occurs (no git branch) get rid of the value
+	#else return the branch name with * attached to it, i.e current branch
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+}
+# PROMPT='%1~ $(get_git_branch)>'
+
+# #if virtualenv exists, echo name of virtualenv
+get_virtualenv () {
+  if test -z $VIRTUAL_ENV ; then
+      venv=''
+  else
+      venv=`basename $VIRTUAL_ENV`
+      venv=$venv
+  fi
+  echo $venv
+}
 
 ## Setting the prompt
 # ------------------------------------------
 
+## LEFT PROMPT
+##------------
+
 # Use bold text for prompt
 PROMPT='%B'
 
-add_unit '  ' $BG_COLOR_2 $BG_COLOR_1      #Arch logo
-add_unit '  %n' $BG_COLOR_1 $BG_COLOR_2    #Username
-add_unit '  %1~ ' $BG_COLOR_2              #Partial file path
+add_unit '  ' $BG_COLOR_1 $BG_COLOR_2      #Arch logo
+add_unit '  %n' $BG_COLOR_2 $BG_COLOR_3    #Username
+add_unit '  %1~ ' $BG_COLOR_3 $RESET_COLOR              #Partial file path
 
 # Ending bold and reseting colors
 PROMPT+='%b%k%f'
+
+## RIGHT PROMPT
+##-------------
+
+##to disable the prompt that python virtualenv adds by default
+VIRTUAL_ENV_DISABLE_PROMPT='1'
+
+# Function that sets the right prompt. No right prompt is displayed if no venv or 
+# git directory is detected in pwd
+set_right_prompt(){
+    RPROMPT='%B'
+    branch=$(get_git_branch)
+    venv=$(get_virtualenv)
+    if [[ -n $branch ]]&&[[ -n $venv ]];then
+        add_unit_right '  $branch' $RESET_COLOR $BG_COLOR_4
+        add_unit_right ' $venv ' $BG_COLOR_4 $BG_COLOR_5
+    elif [[ -n $branch ]];then
+        add_unit_right '  $branch' $RESET_COLOR $BG_COLOR_4
+    elif [[ -n $venv ]];then
+        add_unit_right ' $venv ' $RESET_COLOR $BG_COLOR_5
+    else
+        RPROMPT=''
+    fi
+}
+# Add the function to precmd_functions so that it is executed everytime the prompt
+# refreshes
+precmd_functions+=(set_right_prompt)
+
+RPROMPT+='%b%k%f'
+
